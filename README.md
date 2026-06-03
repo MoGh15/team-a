@@ -1,1 +1,1 @@
-# team-a
+# Praxis Management

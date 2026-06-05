@@ -1,24 +1,32 @@
-import PersonalData from './components/personal-data/PersonalData';
-import './App.css'
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Login from './components/login/Login';
+import AdminDashboard from './components/admin-dashboard/AdminDashboard';
+import useAuthStore from './store/authStore';
+import './App.css';
 
-function App() {
-
-  return (
-    <>
-      <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-          <div className="sm:mx-auto sm:w-full sm:max-w-md">
-            <h1 className="text-center text-3xl font-extrabold text-gray-900 tracking-tight">
-              Praxis Management System
-            </h1>
-          </div>
-
-        
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-2xl">
-          <PersonalData />
-        </div>
-      </div>
-    </>
-  )
+function ProtectedRoute({ children }) {
+  const { token } = useAuthStore();
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
 }
 
-export default App
+function App() {
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route
+        path="/admin/dashboard"
+        element={
+          <ProtectedRoute>
+            <AdminDashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="*" element={<Navigate to="/login" replace />} />
+    </Routes>
+  );
+}
+
+export default App;

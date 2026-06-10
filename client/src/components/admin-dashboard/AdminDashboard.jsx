@@ -26,9 +26,7 @@ const AdminDashboard = () => {
               <h1 className="text-lg font-bold text-gray-900">Admin Dashboard</h1>
             </div>
             <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-600">
-                {user?.email}
-              </span>
+              <span className="text-sm text-gray-600">{user?.email}</span>
               <button
                 onClick={handleLogout}
                 className="px-4 py-2 text-sm font-medium text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
@@ -47,8 +45,10 @@ const AdminDashboard = () => {
           <p className="text-gray-500 mt-1">Here is an overview of your practice management system.</p>
         </div>
 
-        {/* Placeholder Cards */}
+        {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          {/* Patients */}
           <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
             <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
               <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -59,6 +59,7 @@ const AdminDashboard = () => {
             <p className="text-sm text-gray-500 mt-1">Coming soon</p>
           </div>
 
+          {/* Appointments */}
           <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
             <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
               <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -69,6 +70,7 @@ const AdminDashboard = () => {
             <p className="text-sm text-gray-500 mt-1">Coming soon</p>
           </div>
 
+          {/* Reports */}
           <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
             <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
               <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -78,6 +80,18 @@ const AdminDashboard = () => {
             <h3 className="text-lg font-semibold text-gray-800">Reports</h3>
             <p className="text-sm text-gray-500 mt-1">Coming soon</p>
           </div>
+
+          {/* Doctors */}
+          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+            <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+              <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold text-gray-800">Doctors</h3>
+            <p className="text-sm text-gray-500 mt-1">Coming soon</p>
+          </div>
+
         </div>
       </main>
     </div>
@@ -85,4 +99,3 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
-

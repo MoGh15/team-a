@@ -1,20 +1,25 @@
-require('dotenv').config();
 const mongoose = require('mongoose');
-const User = require('../models/User');
+const Admin = require('../models/Admin');
 
-async function seed() {
-  await mongoose.connect(process.env.MONGO_URI);
+async function seedAdmin() {
+  try {
+    const existing = await Admin.findOne({ email: 'admin@example.com' });
+    if (existing) {
+      console.log('Admin already exists, skipping seed.');
+      return;
+    }
 
-  const existing = await User.findOne({ email: 'admin@example.com' });
-  if (existing) {
-    console.log('Admin user already exists');
-  } else {
-    await User.create({ email: 'admin@example.com', password: 'admin123', role: 'Admin' });
-    console.log('Admin user created (admin@example.com / admin123)');
+    const admin = new Admin({
+      email: 'admin@example.com',
+      password: 'admin123',
+      role: 'Admin'
+    });
+
+    await admin.save();
+    console.log('Admin seeded successfully:', admin.email);
+  } catch (err) {
+    console.error('Admin seed error:', err.message);
   }
-
-  await mongoose.disconnect();
 }
 
-seed().catch(err => { console.error(err); process.exit(1); });
-
+module.exports = seedAdmin;

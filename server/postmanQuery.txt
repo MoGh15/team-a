@@ -1,0 +1,22 @@
+{
+  "personalData": {
+    "name": "Ahmed",
+    "surname": "Mustafa",
+    "email": "ahmed.success2026@example.com",
+    "phone": "0123456789",
+    "dateOfBirth": "1990-01-01",
+    "city": "Hamburg",
+    "street": "Main Street",
+    "buildingNumber": "44",
+    "apartNumber": 12, 
+    "postCode": "20095"
+  },
+  "medicalHistory": {
+    "symptoms": ["Feeling dizzy"],
+    "allergies": ["None"],
+    "operations": ["None"],
+    "chronicDiseases": ["None"]
+  },
+  "agreedToTerms": true,
+  "signature": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+}

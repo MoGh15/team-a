@@ -15,13 +15,11 @@ function ProtectedRoute({ children }) {
 function App() {
   return (
     <Routes>
-      {/* 1. مسار المريض: عام ومفتوح تماماً بدون أي حماية أو تسجيل دخول */}
       <Route path="/" element={<PatientPortal />} />
 
-      {/* 2. مسار تسجيل دخول الأدمن */}
       <Route path="/login" element={<Login />} />
 
-      {/* 3. مسار لوحة تحكم الأدمن: محمي ولا يفتح إلا بعد تسجيل الدخول */}
+      
       <Route
         path="/admin/dashboard"
         element={
@@ -31,7 +29,6 @@ function App() {
         }
       />
 
-      {/* تحويل أي مسار مجهول إلى الصفحة الرئيسية للمريض */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

@@ -3,8 +3,19 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:5004/api/auth';
 
+// Safe JSON.parse — never crashes on null or "undefined" string
+const safeParse = (key) => {
+  try {
+    const val = localStorage.getItem(key);
+    if (!val || val === 'undefined' || val === 'null') return null;
+    return JSON.parse(val);
+  } catch {
+    return null;
+  }
+};
+
 const useAuthStore = create((set) => ({
-  user: JSON.parse(localStorage.getItem('user')) || null,
+  user: safeParse('user'),
   token: localStorage.getItem('token') || null,
   isLoading: false,
   error: null,
@@ -13,12 +24,14 @@ const useAuthStore = create((set) => ({
     set({ isLoading: true, error: null });
     try {
       const response = await axios.post(`${API_URL}/login`, { email, password });
-      const { token, user } = response.data;
+
+      // Backend returns { token, admin } — not { token, user }
+      const { token, admin } = response.data;
 
       localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('user', JSON.stringify(admin));
 
-      set({ token, user, isLoading: false, error: null });
+      set({ token, user: admin, isLoading: false, error: null });
       return true;
     } catch (err) {
       const message = err.response?.data?.message || 'Login failed. Please try again.';
@@ -37,4 +50,3 @@ const useAuthStore = create((set) => ({
 }));
 
 export default useAuthStore;
-

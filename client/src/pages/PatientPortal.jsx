@@ -1,8 +1,11 @@
 import React, { useState, useRef } from 'react';
 import SignatureCanvas from 'react-signature-canvas';
 import PersonalData from '../components/personal-data/PersonalData';
+import { useNavigate } from 'react-router-dom';
+import { Specializations } from '../utils/enums';
 
 const PatientPortal = () => {
+  const navigate = useNavigate()
   const [activeStep, setActiveStep] = useState('personal');
   const fileInputRef = useRef(null);
   const sigCanvasRef = useRef(null);
@@ -100,6 +103,7 @@ const PatientPortal = () => {
       const result = await response.json();
       if (response.ok) {
         alert("Success: Profile, signature, and documents submitted successfully!");
+        navigate('/')
       } else {
         alert(`Error: ${result.message || "Validation failed"}`);
         console.error("Server validation errors:", result.error);
@@ -117,6 +121,8 @@ const PatientPortal = () => {
     { id: 'documents', label: 'Documents', icon: '📄' },
     { id: 'submission', label: 'Agreement & Submit', icon: '✍️' }
   ];
+
+  const specsList = Object.values(Specializations);
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
@@ -152,6 +158,7 @@ const PatientPortal = () => {
           {activeStep === 'specialization' && (
             <div className="bg-white p-8 rounded-xl shadow-md">
               <h2 className="text-xl font-bold mb-4">Choose Specialization</h2>
+
               <select
                 name="specialization"
                 value={medicalHistory.specialization}
@@ -159,8 +166,12 @@ const PatientPortal = () => {
                 className="w-full p-2 border rounded"
               >
                 <option value="">Select...</option>
-                <option value="dentist">Dentist</option>
-                <option value="neurology">Neurology</option>
+
+                {specsList.map((spec) => (
+                  <option key={spec} value={spec}>
+                    {spec}
+                  </option>
+                ))}
               </select>
             </div>
           )}

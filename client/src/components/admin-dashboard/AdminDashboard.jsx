@@ -42,21 +42,29 @@ const AdminDashboard = () => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-gray-900">Welcome back!</h2>
-          <p className="text-gray-500 mt-1">Here is an overview of your practice management system.</p>
+          <p className="text-gray-500 mt-1">Here is an overview of management system.</p>
         </div>
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-          {/* Patients */}
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-            <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-              <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
-              </svg>
+          {/* Patients Card (Updated with Navigation) */}
+          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+            <div>
+              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-gray-800">Patients</h3>
+              <p className="text-sm text-gray-500 mt-1">Manage intake records and patient data.</p>
             </div>
-            <h3 className="text-lg font-semibold text-gray-800">Patients</h3>
-            <p className="text-sm text-gray-500 mt-1">Coming soon</p>
+            <button 
+              onClick={() => navigate('/admin/patients')}
+              className="mt-6 w-full bg-blue-50 text-blue-700 font-medium py-2 rounded-lg hover:bg-blue-100 transition-colors"
+            >
+              Manage Patients &rarr;
+            </button>
           </div>
 
           {/* Appointments */}
@@ -70,6 +78,35 @@ const AdminDashboard = () => {
             <p className="text-sm text-gray-500 mt-1">Coming soon</p>
           </div>
 
+          {/* Doctors */}
+          <div 
+            onClick={() => navigate('/admin/doctors')} 
+            className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:border-amber-200 transition-all duration-200 cursor-pointer group"
+          >
+            <div className="w-12 h-12 bg-amber-100 group-hover:bg-amber-600 rounded-xl flex items-center justify-center mb-4 transition-colors duration-200">
+              {/* Professional Doctor/Staff Icon */}
+              <svg className="w-6 h-6 text-amber-600 group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </div>
+            
+            <h3 className="text-lg font-semibold text-gray-800 group-hover:text-amber-600 transition-colors duration-200">
+              Doctors
+            </h3>
+            
+            <p className="text-sm text-gray-500 mt-1 leading-relaxed">
+              Register clinical staff, update specializations, and manage operational shift calendars.
+            </p>
+
+            {/* Action Indicator */}
+            <div className="mt-4 pt-3 border-t border-slate-50 flex items-center text-xs font-semibold text-amber-600 opacity-80 group-hover:opacity-100 transition-opacity">
+              Manage Doctors
+              <svg className="w-3.5 h-3.5 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+
           {/* Reports */}
           <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
             <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
@@ -78,17 +115,6 @@ const AdminDashboard = () => {
               </svg>
             </div>
             <h3 className="text-lg font-semibold text-gray-800">Reports</h3>
-            <p className="text-sm text-gray-500 mt-1">Coming soon</p>
-          </div>
-
-          {/* Doctors */}
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-            <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
-              <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-            </div>
-            <h3 className="text-lg font-semibold text-gray-800">Doctors</h3>
             <p className="text-sm text-gray-500 mt-1">Coming soon</p>
           </div>
 

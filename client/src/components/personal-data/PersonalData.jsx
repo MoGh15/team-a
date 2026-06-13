@@ -11,7 +11,7 @@ const PersonalData = ({ formData, handlePersonalChange }) => {
           <input 
             type="text" name="name" value={formData.name || ''} onChange={handlePersonalChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-            placeholder="John"
+            placeholder="Muster"
           />
         </div>
 
@@ -20,7 +20,7 @@ const PersonalData = ({ formData, handlePersonalChange }) => {
           <input 
             type="text" name="surname" value={formData.surname || ''} onChange={handlePersonalChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-            placeholder="Doe"
+            placeholder="Mann"
           />
         </div>
 
@@ -29,7 +29,7 @@ const PersonalData = ({ formData, handlePersonalChange }) => {
           <input 
             type="email" name="email" value={formData.email || ''} onChange={handlePersonalChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-            placeholder="john@example.com"
+            placeholder="m.mann@example.com"
           />
         </div>
 

@@ -91,7 +91,7 @@ const PatientPortal = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:5004/api/patients/intake', {
+      const response = await fetch('http://localhost:5004/api/patients/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

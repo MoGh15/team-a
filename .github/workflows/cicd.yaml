@@ -1,0 +1,8 @@
+name: CI/CD Praxis team-a Pipline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:

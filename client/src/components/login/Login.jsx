@@ -22,11 +22,22 @@ const Login = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md">
         {/* Logo / Header */}
+        <div className="w-full max-w-md"></div>
         <div className="text-center mb-8">
           <div className="mx-auto w-16 h-16 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/30 mb-4">
             <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11c0-1.657-1.343-3-3-3s-3 1.343-3 3 1.343 3 3 3 3-1.343 3-3zm0 0c0-1.657 1.343-3 3-3s3 1.343 3 3-1.343 3-3 3-3-1.343-3-3zm-3 3v4m6-4v4m-9 0h12" />
             </svg>
+          </div>
+          <div className="flex justify-start">
+            <button
+              type="button"
+              onClick={() => navigate('/')}
+              aria-label="Go to Home"
+              className="mb-4 px-4 py-2 bg-white border border-gray-200 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+            >
+              <span>🏠</span>
+            </button>
           </div>
           <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
             Praxis Management

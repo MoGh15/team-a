@@ -122,11 +122,84 @@ const PatientPortal = () => {
     { id: 'submission', label: 'Agreement & Submit', icon: '✍️' }
   ];
 
+  const currentStepIndex = steps.findIndex((step) => step.id === activeStep);
+
+  const validateStep = () => {
+    if (activeStep === 'personal') {
+      if (
+        !personalData.name ||
+        !personalData.surname ||
+        !personalData.email ||
+        !personalData.phone ||
+        !personalData.dateOfBirth ||
+        !personalData.city ||
+        !personalData.street ||
+        !personalData.buildingNumber ||
+        !personalData.postCode
+      ) {
+        alert('Please complete all required personal data fields.');
+        return false;
+      }
+    }
+
+    if (activeStep === 'specialization') {
+      if (!medicalHistory.specialization) {
+        alert('Please choose a specialization.');
+        return false;
+      }
+    }
+
+    if (activeStep === 'medical') {
+      if (
+        !medicalHistory.currentSickness &&
+        !medicalHistory.allergies &&
+        !medicalHistory.symptoms
+      ) {
+        alert('Please enter at least one medical history detail.');
+        return false;
+      }
+    }
+
+    if (activeStep === 'documents') {
+      // Documents can be optional for now.
+      return true;
+    }
+
+    return true;
+  };
+
+  const handleNext = () => {
+    if (!validateStep()) return;
+
+    const nextStep = steps[currentStepIndex + 1];
+    if (nextStep) {
+      setActiveStep(nextStep.id);
+    }
+  };
+
+  const handleBack = () => {
+    const previousStep = steps[currentStepIndex - 1];
+    if (previousStep) {
+      setActiveStep(previousStep.id);
+    }
+  };
+
   const specsList = Object.values(Specializations);
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto ">
+        <div className="max-w-4xl mx-auto "></div>
+        <div className="flex justify-start mt-6">
+          <button
+            type="button"
+            onClick={() => navigate('/')}
+            aria-label="Go to Home"
+            className="mb-4 px-4 py-2 bg-white border border-gray-200 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+          >
+            <span>🏠</span>
+          </button>
+        </div>
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 text-center mb-6">Patient Registration</h1>
           <div className="flex flex-wrap justify-center gap-2 border-b border-gray-200 pb-4">
@@ -294,6 +367,8 @@ const PatientPortal = () => {
                   />
                 </div>
               </div>
+              
+
 
               <button
                 onClick={handleSubmit}
@@ -303,6 +378,35 @@ const PatientPortal = () => {
               </button>
             </div>
           )}
+
+          <div className="flex justify-between mt-6">
+            <button
+              type="button"
+              onClick={handleBack}
+              disabled={currentStepIndex === 0}
+              className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              Back
+            </button>
+
+            {activeStep !== 'submission' ? (
+              <button
+                type="button"
+                onClick={handleNext}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Next
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={handleSubmit}
+                className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-bold transition-colors shadow-sm"
+              >
+                Submit Complete Profile
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>

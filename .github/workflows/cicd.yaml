@@ -16,9 +16,6 @@ permissions:
   packages: write
 
 jobs:
-  # ============================================
-  # BACKEND JOBS
-  # ============================================
 
   backend-test:
     runs-on: ubuntu-latest

@@ -1,4 +1,4 @@
-name: CI/CD Praxis team-a Pipline
+name: CI/CD Praxis team-a Pipeline
 
 on:
   push:
@@ -6,3 +6,67 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install frontend dependencies
+        run: npm ci
+        working-directory: client
+
+      - name: Build frontend
+        run: npm run build
+        working-directory: client
+
+      - name: Install backend dependencies
+        run: npm ci
+        working-directory: server
+
+      - name: Test backend
+        run: npm test
+        working-directory: server
+
+      - name: Prepare lowercase image names
+        run: |
+          echo "BACKEND_IMAGE=ghcr.io/${GITHUB_REPOSITORY,,}/backend" >> $GITHUB_ENV
+          echo "FRONTEND_IMAGE=ghcr.io/${GITHUB_REPOSITORY,,}/frontend" >> $GITHUB_ENV
+
+      - name: Log in to GitHub Container Registry
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build backend Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./server
+          push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+          tags: |
+            ${{ env.BACKEND_IMAGE }}:latest
+            ${{ env.BACKEND_IMAGE }}:${{ github.sha }}
+
+      - name: Build frontend Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./client
+          push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+          tags: |
+            ${{ env.FRONTEND_IMAGE }}:latest
+            ${{ env.FRONTEND_IMAGE }}:${{ github.sha }}
